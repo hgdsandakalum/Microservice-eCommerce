@@ -2,7 +2,7 @@
 const express = require("express")
 const Customer = require('../models/customer');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Create new customer account
 router.post('/', async(req, res) => {
