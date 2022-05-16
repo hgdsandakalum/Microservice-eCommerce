@@ -44,4 +44,15 @@ router.delete('/paydelete/:id', async(req, res) => {
 
 });
 
+//Get a payment by Id
+router.get('/getPaymentById/:id', async(req,res) => {
+    try{
+        const payment = await Payment.findOne({_id:req.params.id});
+        res.json(payment);
+    }catch (err) {
+        res.status(500).json({ message: err, isError: true });
+        console.error(err);
+    }
+});
+
 module.exports = router;
