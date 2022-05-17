@@ -65,7 +65,9 @@ jobs:
         cluster_name: ctse-cluster-1
         location: us-central1-c
         credentials: ${{ secrets.GKE_SA_KEY2 }}
-      
+    
+    - run: pwd
+    - run: ls
     - run: kubectl apply -f deployment.yaml
     - run: kubectl apply -f service.yaml
     - run: kubectl get all
