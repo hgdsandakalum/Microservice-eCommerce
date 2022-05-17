@@ -8,6 +8,6 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - run: cd Customer Service
+      - run: cd 'Customer Service'
       - run: ls
       - run: pwd
