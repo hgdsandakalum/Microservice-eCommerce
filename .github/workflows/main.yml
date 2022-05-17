@@ -65,6 +65,7 @@ jobs:
         cluster_name: abc-cluster
         location: asia-southeast1-a
         credentials: ${{ secrets.GKE_SA_KEY }}
-        
+      
+    - run: ls
     - run: kubectl create -f deployment.yaml
     
