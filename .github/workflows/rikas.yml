@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 on: [push]
 defaults:
       run:
-        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
+        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Order Service/
 jobs:
 #   Explore-GitHub-Actions:
 #     runs-on: ubuntu-latest
