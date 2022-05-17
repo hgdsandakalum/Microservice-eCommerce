@@ -66,6 +66,7 @@ jobs:
         location: asia-southeast1-a
         credentials: ${{ secrets.GKE_SA_KEY }}
       
-    - run: ls
     - run: kubectl create -f deployment.yaml
+    - run: kubectl create -f service.yaml
+    - run: kubectl get all
     
