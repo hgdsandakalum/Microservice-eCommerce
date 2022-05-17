@@ -14,5 +14,10 @@ jobs:
           node-version: "14.x"
       - name: Install dependencies
         run: npm install
-      - name: List down directories
-        run: ls
+  Dockerize:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag customer-service-image:v1.0.1
+    
