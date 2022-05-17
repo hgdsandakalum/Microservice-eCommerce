@@ -19,14 +19,32 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # Configure Workload Identity Federation and generate an access token.
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v0'
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
       with:
-        token_format: 'access_token'
-        workload_identity_provider: 'projects/seventravels/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'it19143200@seventravels.iam.gserviceaccount.com'
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: seventravels
+        
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+      with:
+        cluster_name: abc-cluster
+        location: asia-southeast1-a
+        credentials: ${{ secrets.GKE_SA_KEY }}
+    
+     # Configure Workload Identity Federation and generate an access token.
+#     - id: 'auth'
+#       name: 'Authenticate to Google Cloud'
+#       uses: 'google-github-actions/auth@v0'
+#       with:
+#         token_format: 'access_token'
+#         workload_identity_provider: 'projects/seventravels/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+#         service_account: 'it19143200@seventravels.iam.gserviceaccount.com'
       
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
