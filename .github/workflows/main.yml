@@ -26,7 +26,7 @@ jobs:
       with:
         token_format: 'access_token'
         workload_identity_provider: 'projects/seventravels/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'h.g.d.sandakalum@gmail.com'
+        service_account: 'it19143200@seventravels.iam.gserviceaccount.com'
       
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
