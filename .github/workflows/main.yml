@@ -4,7 +4,8 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - run: pwd
       - name: List files in the repository
-        working-directory: ./'Customer Service'
+        working-directory: ./Customer Service
         run: |
           ls ${{ github.workspace }}
