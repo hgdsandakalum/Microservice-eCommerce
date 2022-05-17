@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  containers:
+  - image: vinuring/product-service
+    imagePullPolicy: Always
+    name: product-service
+    ports:
+    - containerPort: 3000
