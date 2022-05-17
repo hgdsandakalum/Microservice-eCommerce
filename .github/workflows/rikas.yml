@@ -23,7 +23,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY2 }}
-        project_id: seventravels
+        project_id: fresh-geography-350513
     
      # Configure Workload Identity Federation and generate an access token.
 #     - id: 'auth'
@@ -44,7 +44,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
-            images: rikas/order-service:1.1
+            images: rikas/order-service
           
     - name: Build and push Docker image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -62,8 +62,8 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
       with:
-        cluster_name: abc-cluster
-        location: asia-southeast1-a
+        cluster_name: ctse-cluster-1
+        location: us-central1-c
         credentials: ${{ secrets.GKE_SA_KEY2 }}
       
     - run: kubectl apply -f deployment.yaml
