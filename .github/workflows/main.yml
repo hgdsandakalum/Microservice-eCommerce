@@ -9,5 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 #       - run: cd 'Customer Service'
-      - run: ls -a
+      - run: |
+          ls ${{ github.workspace }}
       - run: pwd
