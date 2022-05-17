@@ -65,6 +65,6 @@ jobs:
         cluster_name: abc-cluster
         location: asia-southeast1-a
         credentials: ${{ secrets.GKE_SA_KEY }}
-    - run: cd /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/k8s/
+    - run: cd k8s
     - run: ls
     
