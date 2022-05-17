@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 on: [push]
 defaults:
       run:
-        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
+        working-directory: /home/rer/work/Microservice-eCommerce/Microservice-unneCommerce/Customer Service/
 jobs:
 #   Explore-GitHub-Actions:
 #     runs-on: ubuntu-latest
@@ -65,6 +65,6 @@ jobs:
         cluster_name: abc-cluster
         location: asia-southeast1-a
         credentials: ${{ secrets.GKE_SA_KEY }}
-    - run: cd k8s
-    - run: ls
+        
+    - run: kubectl create -f deployment.yaml
     
