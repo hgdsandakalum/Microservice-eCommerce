@@ -1,11 +1,11 @@
 name: GitHub Actions Demo
 on: [push]
+defaults:
+      run:
+        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
