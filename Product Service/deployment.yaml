@@ -3,9 +3,17 @@ kind: Deployment
 metadata:
   name: product-service
 spec:
-  containers:
-  - image: vinuring/product-service
-    imagePullPolicy: Always
-    name: product-service
-    ports:
-    - containerPort: 3000
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service
+          image: vinuring/product-service:latest
+          ports:
+            - containerPort: 3000
