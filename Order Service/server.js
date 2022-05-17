@@ -15,11 +15,15 @@ const orderRoute = require('./controllers/OrderController');
 //Route Middlware
 app.use('/order', orderRoute);
 
+app.get('/', (req, res) => {
+    res.send('Api is working');
+  });
+
 mongoose.connect(process.env.MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
     .then((result) => console.log('connected to db'))
     .catch((err) => console.log(err));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log(`Listening to port http://localhost:${port}`);
 });
