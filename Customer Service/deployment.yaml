@@ -16,4 +16,4 @@ spec:
         - name: order-service
           image: rikas/order-service:1.1
           ports:
-            - containerPort: 3001
+            - containerPort: 3000
