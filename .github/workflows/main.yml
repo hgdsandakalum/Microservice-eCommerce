@@ -8,5 +8,4 @@ jobs:
       - run: pwd
       - name: List files in the repository
         working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/test/
-        run: |
-          ls ${{ github.workspace }}
+        run: ls
