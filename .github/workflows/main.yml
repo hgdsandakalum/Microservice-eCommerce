@@ -4,20 +4,29 @@ defaults:
       run:
         working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with: 
-          node-version: "14.x"
-      - name: Install dependencies
-        run: npm install
+#   Explore-GitHub-Actions:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Use Node.js
+#         uses: actions/setup-node@v2
+#         with: 
+#           node-version: "14.x"
+#       - name: Install dependencies
+#         run: npm install
   Dockerize:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
+    # Configure Workload Identity Federation and generate an access token.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/seventravels/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'h.g.d.sandakalum@gmail.com'
       
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -38,4 +47,11 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          
+    # Get the GKE credentials so we can deploy to the cluster
+    - name: Set up GKE credentials
+      uses: google-github-actions/get-gke-credentials@v0
+      with:
+        cluster_name: abc-cluster
+        location: asia-southeast1-a
     
