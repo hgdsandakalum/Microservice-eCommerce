@@ -3,9 +3,14 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
     steps:
       - uses: actions/checkout@v2
-      - run: pwd
-      - name: List files in the repository
-        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Customer Service/
-        run: ls
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with: 
+          node-version: "14.x"
+      - name: Install dependencies
+        run: npm install
