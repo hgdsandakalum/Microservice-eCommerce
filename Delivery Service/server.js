@@ -13,6 +13,9 @@ const deliveryRoute = require('./controllers/deliveryController');
 
 //Route Middlware
 app.use('/delivery', deliveryRoute);
+app.get('/', (req, res) => {
+    res.send('Api is working');
+  });
 
 mongoose.connect(process.env.MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
     .then((result) => console.log('connected to db'))
