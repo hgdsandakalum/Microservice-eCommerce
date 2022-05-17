@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service
+  name: customer-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: order-service
+      app: customer-service
   template:
     metadata:
       labels:
-        app: order-service
+        app: customer-service
     spec:
       containers:
-        - name: order-service
-          image: rikas/order-service:1.1
+        - name: customer-service
+          image: it19143200/customer-service-image
           ports:
             - containerPort: 3000
