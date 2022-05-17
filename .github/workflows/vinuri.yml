@@ -1,0 +1,73 @@
+name: GitHub Actions Demo
+on: [push]
+defaults:
+      run:
+        working-directory: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Product Service/
+jobs:
+#   Explore-GitHub-Actions:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Use Node.js
+#         uses: actions/setup-node@v2
+#         with: 
+#           node-version: "14.x"
+#       - name: Install dependencies
+#         run: npm install
+  Dockerize:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY3 }}
+        project_id: cste-assingment3
+    
+     # Configure Workload Identity Federation and generate an access token.
+#     - id: 'auth'
+#       name: 'Authenticate to Google Cloud'
+#       uses: 'google-github-actions/auth@v0'
+#       with:
+#         token_format: 'access_token'
+#         workload_identity_provider: 'projects/seventravels/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+#         service_account: 'it19143200@seventravels.iam.gserviceaccount.com'
+      
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+          username: vinuring
+          password: vngMC@7225
+          
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+            images: vinuring/product-service
+          
+    - name: Build and push Docker image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+          context: /home/runner/work/Microservice-eCommerce/Microservice-eCommerce/Product Service/
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+#     - run: |-
+#         gcloud --quiet auth configure-docker
+
+ 
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+      with:
+        cluster_name: abc-company-1
+        location: australia-southeast1-a
+        credentials: ${{ secrets.GKE_SA_KEY3 }}A
+      
+    - run: kubectl apply -f deployment.yaml
+    - run: kubectl apply -f service.yaml
+    - run: kubectl get all
