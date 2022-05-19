@@ -20,6 +20,6 @@ mongoose.connect(process.env.MONGODB, { useUnifiedTopology: true, useNewUrlParse
     .catch((err) => console.log(err));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Listening to port http://localhost:${port}`);
 });

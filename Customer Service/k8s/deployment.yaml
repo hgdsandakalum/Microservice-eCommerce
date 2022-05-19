@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-service
+spec:
+  containers:
+  - image: it19143200/customer-service-image
+    imagePullPolicy: Always
+    name: customer-service
+    ports:
+    - containerPort: 3000
