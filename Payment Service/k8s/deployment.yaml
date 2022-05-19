@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+spec:
+  containers:
+  - image: tiran98/payment_microservice
+    imagePullPolicy: Always
+    name: payment-service
+    ports:
+    - containerPort: 3000
